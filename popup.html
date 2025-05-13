@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="https://unpkg.com/@chakra-ui/css@2.0.0/dist/chakra-ui.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@chakra-ui/react@2.8.2/dist/index.umd.js"></script>
+  <script src="https://unpkg.com/@chakra-ui/charts@2.0.0/dist/index.umd.js"></script>
+  <script src="https://unpkg.com/recharts@2.10.3/umd/Recharts.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="header">
+      <h1><i class="fa-solid fa-briefcase" style="margin-right:8px;"></i>Job Tracker</h1>
+      <div class="tabs">
+        <button class="tab-button active" data-tab="form">New Application</button>
+        <button class="tab-button" data-tab="recent">Recent (5)</button>
+        <button class="tab-button" data-tab="analytics"><i class="fa-solid fa-chart-bar" style="margin-right:6px;"></i>Analytics</button>
+      </div>
+    </div>
+
+    <div class="tab-content active" id="form-tab">
+      <form id="jobForm">
+        <div class="form-group">
+          <label for="jobTitle">Job Title *</label>
+          <input type="text" id="jobTitle" name="jobTitle" required>
+        </div>
+
+        <div class="form-group">
+          <label for="companyName">Company Name *</label>
+          <input type="text" id="companyName" name="companyName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dateApplied">Date Applied *</label>
+          <input type="date" id="dateApplied" name="dateApplied" required>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Application Status *</label>
+          <select id="status" name="status" required>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="jobUrl">Job URL</label>
+          <input type="url" id="jobUrl" name="jobUrl">
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" id="submitBtn" class="chakra-button">
+            <span class="button-text">Save Application</span>
+            <div class="button-spinner"></div>
+          </button>
+          <button type="button" id="clearBtn" class="chakra-button">Clear Form</button>
+          <button type="button" id="viewSheetBtn" class="chakra-button">View Your Google Sheet</button>
+        </div>
+      </form>
+      <div class="footer-note">Job Tracker Version 1.0 • Updated: May 13, 2025 • Built with ❤️</div>
+    </div>
+
+    <div class="tab-content" id="recent-tab">
+      <div class="recent-applications" id="recentApplications">
+        <div class="loading-message">Loading recent applications...</div>
+      </div>
+      <div class="footer-note">Job Tracker Version 1.0 • Updated: May 13, 2025 • Built with ❤️</div>
+    </div>
+
+    <div class="tab-content" id="analytics-tab">
+      <div class="analytics-container">
+        <!-- KPIs Section -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Applied <span class="kpi-info" title="Total number of applications">ⓘ</span></div>
+            <div class="kpi-value-row"><span class="kpi-icon"><i class="fa-solid fa-file-alt"></i></span><span class="kpi-value" id="totalApplied">0</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Rejected <span class="kpi-info" title="Number of rejections">ⓘ</span></div>
+            <div class="kpi-value-row"><span class="kpi-icon"><i class="fa-solid fa-times-circle"></i></span><span class="kpi-value" id="totalRejected">0</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Interviews <span class="kpi-info" title="Number of interviews">ⓘ</span></div>
+            <div class="kpi-value-row"><span class="kpi-icon"><i class="fa-solid fa-microphone"></i></span><span class="kpi-value" id="totalInterviews">0</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Accepted <span class="kpi-info" title="Number of offers/acceptances">ⓘ</span></div>
+            <div class="kpi-value-row"><span class="kpi-icon"><i class="fa-solid fa-check-circle"></i></span><span class="kpi-value" id="totalAccepted">0</span></div>
+          </div>
+        </div>
+
+        <!-- Graph Section -->
+        <div id="applicationsChart"></div>
+
+        <!-- Insights Section -->
+        <div class="insights-container">
+          <div class="insight-card">
+            <div class="insight-icon">📊</div>
+            <div class="insight-text" id="applicationFrequency">Loading insights...</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">Job Tracker Version 1.0 • Updated: May 13, 2025 • Built with ❤️</div>
+    </div>
+
+    <div id="message" class="message"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

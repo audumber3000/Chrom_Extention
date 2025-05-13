@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Application Tracker - Settings</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      width: auto;
+      padding: 40px;
+    }
+    .instructions {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+    
+    <div class="instructions">
+      <h2>Setup Instructions</h2>
+      <ol>
+        <li>Create a new Google Sheet</li>
+        <li>Copy the spreadsheet ID from the URL (the long string between /d/ and /edit)</li>
+        <li>Paste the ID below</li>
+        <li>Click Save</li>
+      </ol>
+    </div>
+
+    <form id="optionsForm">
+      <div class="form-group">
+        <label for="spreadsheetId">Google Spreadsheet ID</label>
+        <input type="text" id="spreadsheetId" name="spreadsheetId" required>
+      </div>
+
+      <button type="submit" id="saveBtn">Save Settings</button>
+    </form>
+
+    <div id="message" class="message"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html> 
